@@ -1,5 +1,5 @@
-<div class="index-page-container d-flex">
-  <div class="sidebar pt-5 pl-5 pr-5">
+<div class="index-page-container">
+  <div class="sidebar ">
     <!-- Sidebar here -->
 
 
@@ -7,34 +7,6 @@
       <%= f.input :categories, collection: ["British", "French", "Japanese"], as: :check_boxes, label: "Category", required: false %>
       <%= f.input :dietary, collection: ["Vegetarian", "Vegan", "Gluten-Free"], as: :check_boxes, label: "Dietary", required: false %>
       <!-- Rating Section start here, as part of the simple form -->
-      <fieldset class="form-group check_boxes required search_average_rating">
-        <legend class="col-form-label pt-0">Rating</legend>
-        <input type="hidden" name="search[average_rating][]" value="">
-        <div class="form-check">
-          <input class="form-check-input check_boxes required" type="checkbox" value="3" name="search[average_rating][]" id="search_average_rating_3">
-          <label class="form-check-label collection_check_boxes" for="search_average_rating_3">
-            <div>
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-            </div>
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input check_boxes required" type="checkbox" value="4" name="search[average_rating][]" id="search_average_rating_4">
-          <label class="form-check-label collection_check_boxes" for="search_average_rating_4">
-            <div>
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-            </div>
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input check_boxes required" type="checkbox" value="5" name="search[average_rating][]" id="search_average_rating_5">
-          <label class="form-check-label collection_check_boxes" for="search_average_rating_5">
-            <div>
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-          </label>
-        </div>
-      </fieldset>
       <%= f.input :query , as: :hidden, input_html: {value: params.dig(:search, :query)} %>
       <%= f.button :submit, "Filter Results", class: "btn btn-outline-primary" %>
     <% end %>
@@ -91,17 +63,6 @@
 
               </div>
 
-              <div class="restaurant-card-rating d-flex justify-content-between mt-4">
-
-                <div>
-                  <% restaurant.average_rating.to_i.times do  %>
-                    <i class="fas fa-star"></i>
-                  <% end %>
-                </div>
-
-                <h7><b><%= restaurant.rating_in_words %></b></h7>
-
-              </div>
             </div>
           </div>
         </div>

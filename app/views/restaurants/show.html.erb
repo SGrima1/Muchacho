@@ -104,7 +104,7 @@
 				<% if menu.tasting == false  %>
 					<% menu.menu_items.each do |items| %>
 						<% if items.dish.meal_category == "Starter"  %>
-							<div class="card-dish " >
+							<div class="card-dish" >
 							<% if items.dish.photo.attached?  %>
                 <%= cl_image_tag items.dish.photo.key, height: 300, width: 400, crop: :fill %>
                 <% else %>

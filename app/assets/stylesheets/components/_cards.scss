@@ -192,13 +192,13 @@
 }
 
 @media(max-width: 768px) {
-  .cards {
+  .restaurant-card {
     grid-template-columns: 1fr;
   }
 }
 
 .restaurant-cards {
-  width: 50vw;
+  width: 100%;
   position: relative;
 }
 
