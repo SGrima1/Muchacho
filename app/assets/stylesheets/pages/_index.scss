@@ -107,5 +107,25 @@ font-family: 'Playfair Display', serif;
 
   .index-page-container {
     display: grid;
+    margin-right: 0;
   }
+
+  .sidebar-form {
+    display: grid;
+    grid-template-columns: 3fr;
+    margin-right: 5vh;
+  }
+
+  .search_categories {
+    grid-column: 1;
+  }
+
+  .search_dietary {
+    grid-column: 3;
+  }
+
+  #filter{
+    grid-column: 2;
+  }
+
 }

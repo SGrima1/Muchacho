@@ -8,7 +8,7 @@
       <%= f.input :dietary, collection: ["Vegetarian", "Vegan", "Gluten-Free"], as: :check_boxes, label: "Dietary", required: false %>
       <!-- Rating Section start here, as part of the simple form -->
       <%= f.input :query , as: :hidden, input_html: {value: params.dig(:search, :query)} %>
-      <%= f.button :submit, "Filter Results", class: "btn btn-outline-primary" %>
+      <%= f.button :submit, "Filter Results", class: "btn btn-outline-primary", id: "filter" %>
     <% end %>
   </div>
 
