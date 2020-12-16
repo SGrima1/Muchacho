@@ -12,41 +12,37 @@
 </div>
 
   <div class="tasting-menu row m-0">
-    <div class="restaurant-cards col-7">
+    <div class="restaurant-cards col-6">
       <% @restaurant.menus.each do |menu| %>
         <% if menu.tasting == true  %>
-          <div class="autoplay">
+          <div class="slider-for">
            <% menu.menu_items.each do |items| %>
-              <div class="card-dish-tasting p-3" >
+              <div class="card-dish-tasting " >
                 <div class="row tasting_images d-flex justify-content-around">
                 <% if items.dish.photo.attached?  %>
                   <%= cl_image_tag items.dish.photo.key, height: 250, width: 450,crop: :fill , :class => "tasting_img"  %>
                 <% else %>
                   <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
                 <% end %>
-
-                <% if items.dish.wine.present? && items.dish.wine.photo.attached? %>
-                  <%= cl_image_tag items.dish.wine&.photo&.key, height:350, width: 120, crop: :fill, :class => "wine_img" %>
-                <% end %>
                 </div>
-                <div class="card-dish-infos">
-                  <div>
-
-                    <p><%= items.dish.instructions if items.dish.prep_time == 0%></p>
-                    <p><%#= "Ready in only #{items.dish.prep_time}minutes." if items.dish.prep_time > 0 %></p>
-                  </div>
-                  <!-- <h2 class="card-trip-pricing btn-price">£<%= items.dish.cost / 100  %></h2> -->
-                </div>
-                <h2 class="meal_category"> <%= items.dish.meal_category %> <i class="fas fa-grip-lines-vertical"></i> <%= items.dish.name %></h2>
-                <h2 class="meal_category_name"> </h2>
-                <% if items.dish.wine.present? && items.dish.wine.photo.attached? %>
-                <div class="wine_carousel_description">
-                <p> <%= items.dish.wine.description %> </p>
-                </div>
-                <% end %>
               </div>
             <% end %>
           </div>
+
+					<div class="slider-nav">
+						 <% menu.menu_items.each do |items| %>
+              <div class="card-dish-tasting-nav" >
+								<% if items.dish.photo.attached?  %>
+									<h3><%= cl_image_tag items.dish.photo.key, height: 90, width: 150,crop: :fill , :class => "tasting_img"  %></h3>
+								<% else %>
+									<img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
+								<% end %>
+						</div>
+						<% end %>
+					</div>	
+
+
+
         <% end %>
       <% end %>
     </div>

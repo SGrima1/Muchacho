@@ -11,6 +11,7 @@
     "bideo.js": "^1.0.0",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
+    "jquery-zoom": "^1.7.21",
     "mapbox-gl": "^1.13.0",
     "places.js": "^1.19.0",
     "popper.js": "^1.16.1",

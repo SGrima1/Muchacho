@@ -1,16 +1,19 @@
 export const slickCarousel = () => {
-//   $('.single-item').slick({
-//     infinite: true,
-//     slidesToShow: 1,
-//     slidesToScroll: 1
-//     });
-// };
 
-
-$('.autoplay').slick({
+$('.slider-for').slick({
   slidesToShow: 1,
   slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 3000,
+  arrows: false,
+  fade: true,
+  asNavFor: '.slider-nav'
+});
+$('.slider-nav').slick({
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  asNavFor: '.slider-for',
+  dots: true,
+  focusOnSelect: true
 });
 };
+
+

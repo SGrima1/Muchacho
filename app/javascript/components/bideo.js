@@ -22,7 +22,7 @@ const backgroundVideo = () => {
       // of different video formats to add
       src: [
         {
-          src: 'https://res.cloudinary.com/dzyd1ynmn/video/upload/v1606324116/video_2_rwbpet.mp4',
+          src: '',
           type: 'video/mp4'
         },
         // {

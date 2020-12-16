@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     resources :dishes, only:[:create, :new]
     resources :orders, only: [:new, :create, :show]
     resources :reviews, only: [ :new, :create,:index ]
-
   end
+  
   resources :orders, only: [:index, :show] do
     post :is_ready, on: :member
     post :is_being_delivered, on: :member
