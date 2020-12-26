@@ -18,17 +18,33 @@ export const initCards = () => {
        });
      }
      updateDisplay();
-    // const input = document.querySelector("#order_dish_id")
-    // const array = input.value.split(",")
-    // array.push(e.currentTarget.dataset.dishId)
-    // console.log("toto", array)
-    // const name = e.currentTarget.dataset.dishName;
-    // const cost = e.currentTarget.dataset.dishCost;
-    // document.querySelector(".basket-info").insertAdjacentHTML("beforeend",`<div>${name} - ${cost}</div>`)
-    // input.value = array.join(",")
    })
  })
 };
+
+export const initWines = () => {
+  console.log("helloooooooooooo")
+  const wineBasket = document.querySelectorAll("#wine_basket");
+  wineBasket.forEach(wine => {
+    wine.addEventListener('click', e => {
+      
+      const foundOrder = basket.find (order => order.dishId === e.currentTarget.dataset.dishId );
+      if (foundOrder) {
+        foundOrder.count++; 
+      } else {
+        basket.push({
+          dishId: e.currentTarget.dataset.dishId,
+          dishName: e.currentTarget.dataset.dishName,
+          cost: e.currentTarget.dataset.dishCost,
+          count: 1,
+        });
+      }
+      updateDisplay();
+    })
+  })
+};
+
+
 
 function updateDisplay() {
   let total = 0;
@@ -41,9 +57,9 @@ function updateDisplay() {
       }    
       basket.forEach((order) => {
         total += parseInt(order.cost, 10);
-        elBasketInfo.insertAdjacentHTML("beforeend",`<div class="basket-dishOrder">${order.dishName} - ${order.cost} -(${order.count})  </div>`)
+        elBasketInfo.insertAdjacentHTML("beforeend",`<div class="basket-dishOrder">${order.dishName} - ${parseInt(order.cost, 10) / 100} -(${order.count})  </div>`)
       });
-      elBasketInfo.insertAdjacentHTML("beforeend",`<div class="basket-dishOrder">TOTAL: ${total}</div>`)
+      elBasketInfo.insertAdjacentHTML("beforeend",`<div class="basket-dishOrder">TOTAL: ${total / 100}</div>`)
     }
   }
 

@@ -40,28 +40,16 @@ import { initAutocomplete } from '../components/init_autocomplete';
 import {slickCarousel} from '../components/slick_carousel';
 import { initTasting } from '../components/init_tasting';
 import { initCards } from '../components/init_cards';
-import { initWines } from '../components/init_wines';
+import { initWines } from '../components/init_cards';
+import { profileDropdown } from "../components/init_dropdown"
 
 
 
 
 document.addEventListener('turbolinks:load', () => {
-  initUpdateNavbarOnScroll();
-
-  var dropdown = document.getElementsByClassName("dropdown-btn");
-
-  for (var i = 0; i < dropdown.length; i++) {
-    dropdown[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      var dropdownContent = this.nextElementSibling;
-      if (dropdownContent.style.display === "block") {
-        dropdownContent.style.display = "none";
-      } else {
-        dropdownContent.style.display = "block";
-      }
-    })};
-
   // Call your JS functions here
+  initUpdateNavbarOnScroll();
+  profileDropdown();
   initUpdateNavbarOnScroll();
   backgroundVideo();
   slickCarousel();

@@ -1,3 +1,4 @@
+
 export const initWines = () => {
   const cards = document.querySelectorAll("#wine_basket");
   cards.forEach(card => {
