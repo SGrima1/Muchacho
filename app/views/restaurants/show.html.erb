@@ -60,7 +60,15 @@
               </li>
             </ul>
           <% end %>
-            <button type="button" class="btn btn-add-basket" id="tasting-basket" data-dish-id="<%= menu.menu_items.pluck(:dish_id).join(",") %>" data-dish-name="Tasting Menu">Choose our Tasting Menu!</button>
+            <button type="button" class="btn btn-add-basket" id="tasting-basket" data-dish-id="<%= menu.menu_items.pluck(:dish_id).join(",") %>" 
+						
+						data-dish-cost="<% 
+						tasting_cost = []
+						menu.menu_items.each do |items|
+						tasting_cost << items.dish.cost
+						end %>
+						<%= tasting_cost.reduce(:+) %>" 
+						data-dish-name="Tasting Menu">Choose our Tasting Menu!</button>
         <% end %>
 
       <% end %>

@@ -52,6 +52,30 @@ export const initWines = () => {
   })
 };
 
+export const initTasting = () => {
+  const tastingBasket = document.getElementById("tasting-basket");
+   console.log(tastingBasket);
+   if (!tastingBasket) return 
+   tastingBasket.addEventListener('click', e => {
+     const foundOrder = basket.find (order => order.dishId === e.currentTarget.dataset.dishId );
+      if (foundOrder) {
+        foundOrder.count++; 
+      } else {
+        basket.push({
+          dishId: e.currentTarget.dataset.dishId,
+          dishName: e.currentTarget.dataset.dishName,
+          cost: e.currentTarget.dataset.dishCost,
+          count: 1,
+        });
+      }
+ 
+      const input = document.querySelector("#order_dish_id")
+      const array = input.value.split(",")
+      console.log(array)
+      array.push(e.currentTarget.dataset.dishId)
+      input.value = array.join(",")
+      updateDisplay();
+    })};
 
 
 function updateDisplay() {

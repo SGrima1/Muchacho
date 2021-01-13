@@ -38,7 +38,7 @@ import { initUpdateNavbarOnScroll } from '../components/navbar';
 import { backgroundVideo } from '../components/bideo';
 import { initAutocomplete } from '../components/init_autocomplete';
 import {slickCarousel} from '../components/slick_carousel';
-import { initTasting } from '../components/init_tasting';
+import { initTasting } from '../components/init_cards';
 import { initCards } from '../components/init_cards';
 import { initWines } from '../components/init_cards';
 import { profileDropdown } from "../components/init_dropdown"
