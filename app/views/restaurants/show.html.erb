@@ -68,7 +68,7 @@
 						tasting_cost << items.dish.cost
 						end %>
 						<%= tasting_cost.reduce(:+) %>" 
-						data-dish-name="Tasting Menu">Choose our Tasting Menu!</button>
+						data-dish-name="Tasting Menu">Choose our Tasting Menu! - £<%= tasting_cost.reduce(:+) /100 %> </button>
         <% end %>
 
       <% end %>
