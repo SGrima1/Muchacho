@@ -17,6 +17,9 @@ export const initCards = () => {
          count: 1,
        });
      }
+    const input = document.querySelector("#order_dish_id")
+    const array = input.value.split(",")
+    array.push(e.currentTarget.dataset.dishId)
      updateDisplay();
    })
  })
