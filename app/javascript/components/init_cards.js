@@ -17,16 +17,17 @@ export const initCards = () => {
          count: 1,
        });
      }
-    const input = document.querySelector("#order_dish_id")
-    const array = input.value.split(",")
-    array.push(e.currentTarget.dataset.dishId)
-     updateDisplay();
+      const input = document.querySelector("#order_dish_id")
+      const array = input.value.split(",")
+      array.push(e.currentTarget.dataset.dishId)
+      input.value = array.join(",")
+      console.log(document.querySelector("#order_dish_id"))
+      updateDisplay();
    })
  })
 };
 
 export const initWines = () => {
-  console.log("helloooooooooooo")
   const wineBasket = document.querySelectorAll("#wine_basket");
   wineBasket.forEach(wine => {
     wine.addEventListener('click', e => {
@@ -42,6 +43,10 @@ export const initWines = () => {
           count: 1,
         });
       }
+      const input = document.querySelector("#order_wine_id")
+      const array = input.value.split(",")
+      array.push(e.currentTarget.dataset.dishId)
+      input.value = array.join(",")
       updateDisplay();
     })
   })
@@ -59,7 +64,7 @@ function updateDisplay() {
         elBasketInfo.removeChild(elBasketInfo.firstChild)
       }    
       basket.forEach((order) => {
-        total += parseInt(order.cost, 10);
+        total += parseInt(order.cost * order.count, 10);
         elBasketInfo.insertAdjacentHTML("beforeend",`<div class="basket-dishOrder">${order.dishName} - ${parseInt(order.cost, 10) / 100} -(${order.count})  </div>`)
       });
       elBasketInfo.insertAdjacentHTML("beforeend",`<div class="basket-dishOrder">TOTAL: ${total / 100}</div>`)
