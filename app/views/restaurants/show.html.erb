@@ -8,27 +8,33 @@
   </div>
   <div class="col-4" style="margin-left: -100px;">
     <iframe src="<%=@restaurant.spotify_url%>" width="450" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basketDropdown" aria-controls="basketDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <h6><%= fa_icon "camera-retro" %> </h6>
-  </button>
+
+  </div>
+</div>
+
+
+
+<div class="show-container mx-auto">
+		<div class="basket-container">
+			<button class="basket-toggler" type="button" data-toggle="collapse" data-target="#basketDropdown" aria-controls="basketDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<h6><%= fa_icon "camera-retro" %> </h6>
+			</button>
 			<div class="collapse" id="basketDropdown">
-				<div class="col-10 restaurant-cart basket-info">
+				<div class="col-2 restaurant-cart basket-info">
 					<h4>Basket</h4>
 					<%= simple_form_for [@restaurant, @order] do |f| %>
-					<%= f.input :dish_id, as: :hidden %>
-					<%= f.input :wine_id, as: :hidden %>
-					<%= f.input :status, :input_html => { :value => 'Being Prepared' }, as: :hidden %>
-					<%= @order.dish %>
-					<%= f.submit 'Confirm Order', class: 'btn btn-gold' %>
-					<%# <%= link_to "View Basket", dashboard_path, class: 'btn btn-checkout' %>
+						<%= f.input :dish_id, as: :hidden %>
+						<%= f.input :wine_id, as: :hidden %>
+						<%= f.input :status, :input_html => { :value => 'Being Prepared' }, as: :hidden %>
+						<%= @order.dish %>
+						<%= f.submit 'Confirm Order', class: 'btn btn-gold' %>
+						<%# <%= link_to "View Basket", dashboard_path, class: 'btn btn-checkout' %>
 					<% end %>
-					<div class="basket-info-list">
-					
+					<div class="basket-info-list">		
 					</div>
 				</div>
 			</div>
-  </div>
-</div>
+	</div>
 
   <div class="tasting-menu row mx-auto">
     <div class="restaurant-cards col-6" style="display: flex; justify-content: center">
@@ -40,7 +46,7 @@
               <div class="card-dish-tasting " >
                 <div class="row tasting_images d-flex justify-content-around">
                 <% if items.dish.photo.attached?  %>
-                  <%= cl_image_tag items.dish.photo.key, height: 400, width: 547,crop: :fill , :class => "tasting_img"  %>
+                  <%= cl_image_tag items.dish.photo.key, height: 525, width: 547,crop: :fill , :class => "tasting_img"  %>
                 <% else %>
                   <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
                 <% end %>
@@ -466,7 +472,7 @@
       </button>
     </form>
  </div>
-
+</div>
 
 
 
