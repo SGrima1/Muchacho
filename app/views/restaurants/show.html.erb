@@ -8,10 +8,29 @@
   </div>
   <div class="col-4" style="margin-left: -100px;">
     <iframe src="<%=@restaurant.spotify_url%>" width="450" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basketDropdown" aria-controls="basketDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <h6><%= fa_icon "camera-retro" %> </h6>
+  </button>
+			<div class="collapse" id="basketDropdown">
+				<div class="col-10 restaurant-cart basket-info">
+					<h4>Basket</h4>
+					<%= simple_form_for [@restaurant, @order] do |f| %>
+					<%= f.input :dish_id, as: :hidden %>
+					<%= f.input :wine_id, as: :hidden %>
+					<%= f.input :status, :input_html => { :value => 'Being Prepared' }, as: :hidden %>
+					<%= @order.dish %>
+					<%= f.submit 'Confirm Order', class: 'btn btn-gold' %>
+					<%# <%= link_to "View Basket", dashboard_path, class: 'btn btn-checkout' %>
+					<% end %>
+					<div class="basket-info-list">
+					
+					</div>
+				</div>
+			</div>
   </div>
 </div>
 
-  <div class="tasting-menu row m-0">
+  <div class="tasting-menu row mx-auto">
     <div class="restaurant-cards col-6" style="display: flex; justify-content: center">
 			<div class="menu_width" style="width:75%">
       <% @restaurant.menus.each do |menu| %>
@@ -94,8 +113,8 @@
   </div>
 
 
-<div class="bottom-container">
-  <div class="alacarte col-8">
+<div class="bottom-container mx-auto">
+  <div class="alacarte">
 
     <div class="new-dish justify-content-bewteen m-4">
       <% if current_user.admin? %>
@@ -434,20 +453,7 @@
     </div>
   </div>
 
-	<div class="col-3 restaurant-cart basket-info">
-    <h4>Basket</h4>
-    <%= simple_form_for [@restaurant, @order] do |f| %>
-    <%= f.input :dish_id, as: :hidden %>
-    <%= f.input :wine_id, as: :hidden %>
-		<%= f.input :status, :input_html => { :value => 'Being Prepared' }, as: :hidden %>
-    <%= @order.dish %>
-    <%= f.submit 'Confirm Order', class: 'btn btn-gold' %>
-    <%# <%= link_to "View Basket", dashboard_path, class: 'btn btn-checkout' %>
-    <% end %>
-		<div class="basket-info-list">
-		
-		</div>
-  </div>
+
 </div>
 
 <div class="container p-5">
