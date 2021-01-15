@@ -4,7 +4,7 @@
 }
 
 .show-container{
-  width: 1535px;
+  width: 1360px;
 }
 
 .bottom-container {  
@@ -19,7 +19,8 @@
 }
 
 .tasting-menu {
-  width: 1535px;
+  width: 1360px;
+  padding-left: 40px;
 }
 
 .btn-dish {
@@ -91,6 +92,7 @@ list-style-type: none;
   font-family: 'Pacifico', cursive;
   color: $m-blue;
   text-align: center;
+  margin-bottom: 24px;
 }
 
 .wine_description h1 {
@@ -105,7 +107,7 @@ text-align: center;
 }
 
 .tasting_description {
-
+  text-align: justify;
 }
 
 .wine_description {

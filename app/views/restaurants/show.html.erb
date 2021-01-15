@@ -3,7 +3,7 @@
 <div class="row show_banner mb-5 mb-5 justify-content-bewteen">
   <div class="col-8 restaurant-info" style="left: 35px;">
     <h1><%= @restaurant.name %> <i class="fas fa-utensils"></i></h1>
-    <h6 style="max-width: 720px;"><%= @restaurant.description %></h6>
+
     <p><%= @restaurant.category %> <i class="fas fa-grip-lines-vertical"></i> <%= @restaurant.dietary %></p>
   </div>
   <div class="col-4" style="margin-left: -100px;">
@@ -37,8 +37,8 @@
 	</div>
 
   <div class="tasting-menu row mx-auto">
-    <div class="restaurant-cards col-6" style="display: flex; justify-content: center">
-			<div class="menu_width" style="width:75%">
+    <div class="restaurant-cards col-5" style="display: flex; justify-content: center">
+			<div class="menu_width" style="width:100%">
       <% @restaurant.menus.each do |menu| %>
         <% if menu.tasting == true  %>
           <div class="slider-for">
@@ -46,7 +46,7 @@
               <div class="card-dish-tasting " >
                 <div class="row tasting_images d-flex justify-content-around">
                 <% if items.dish.photo.attached?  %>
-                  <%= cl_image_tag items.dish.photo.key, height: 525, width: 547,crop: :fill , :class => "tasting_img"  %>
+                  <%= cl_image_tag items.dish.photo.key, height: 460, width: 500, crop: :fill , :class => "tasting_img"  %>
                 <% else %>
                   <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
                 <% end %>
@@ -59,7 +59,7 @@
 						 <% menu.menu_items.each do |items| %>
               <div class="card-dish-tasting-nav" >
 								<% if items.dish.photo.attached?  %>
-									<h3><%= cl_image_tag items.dish.photo.key, height: 130, width: 133,crop: :fill , :class => "tasting_img"  %></h3>
+									<h3><%= cl_image_tag items.dish.photo.key, height: 110, width: 110,crop: :fill , :class => "tasting_img"  %></h3>
 								<% else %>
 									<img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
 								<% end %>
@@ -73,18 +73,30 @@
       <% end %>
 			</div>
     </div>
-    <div class="tasting_description col" id="tasting">
+		<div class="wine_description col-3">
+			<h1>Wine Pairing</h1>
+
+				<% @restaurant.menus.each do |menu| %>
+					<% if menu.tasting == true  %>
+						<% menu.menu_items.each do |items| %>
+							<ul>
+								<% if items.dish.wine.present? %>
+								<li> <button type="button" class="btn-wine" id="wine_basket" data-dish-id="<%= items.dish.wine.id %>" data-dish-name="<%= items.dish.wine.name %>" data-dish-cost="<%= items.dish.wine.cost %>"><i class="fas fa-wine-glass-alt p-2"> </i><%= items.dish.wine.name if items.dish.wine.nil? == false%></button></li>
+								<% else %>
+								<li></li>
+								<% end %>
+							</ul>
+						<% end %>
+
+					<% end %>
+				<% end %>
+		</div>
+    <div class="tasting_description col-4" id="tasting">
       <h1> Tasting Menu</h1>
       <% @restaurant.menus.each do |menu| %>
 
         <% if menu.tasting == true  %>
-          <% menu.menu_items.each do |items| %>
-            <ul>
-              <li data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>" class="tasting-items">
-                <%= items.dish.name %>
-              </li>
-            </ul>
-          <% end %>
+					<h6 style="max-width: 720px;"><%= @restaurant.description %></h6>
             <button type="button" class="btn btn-add-basket" id="tasting-basket" data-dish-id="<%= menu.menu_items.pluck(:dish_id).join(",") %>" 
 						
 						data-dish-cost="<% 
@@ -98,24 +110,7 @@
 
       <% end %>
     </div>
-    <div class="wine_description col">
-      <h1>Wine Pairing</h1>
-
-        <% @restaurant.menus.each do |menu| %>
-          <% if menu.tasting == true  %>
-            <% menu.menu_items.each do |items| %>
-              <ul>
-                <% if items.dish.wine.present? %>
-                <li> <button type="button" class="btn-wine" id="wine_basket" data-dish-id="<%= items.dish.wine.id %>" data-dish-name="<%= items.dish.wine.name %>" data-dish-cost="<%= items.dish.wine.cost %>"><i class="fas fa-wine-glass-alt p-2"> </i><%= items.dish.wine.name if items.dish.wine.nil? == false%></button></li>
-                <% else %>
-                <li></li>
-                <% end %>
-              </ul>
-            <% end %>
-
-          <% end %>
-        <% end %>
-    </div>
+ 
   </div>
 
 
