@@ -22,6 +22,7 @@
 			<div class="collapse" id="basketDropdown">
 				<div class="col-2 restaurant-cart basket-info">
 					<h4>Basket</h4>
+					
 					<%= simple_form_for [@restaurant, @order] do |f| %>
 						<%= f.input :dish_id, as: :hidden %>
 						<%= f.input :wine_id, as: :hidden %>
@@ -30,7 +31,9 @@
 						<%= f.submit 'Confirm Order', class: 'btn btn-gold' %>
 						<%# <%= link_to "View Basket", dashboard_path, class: 'btn btn-checkout' %>
 					<% end %>
-					<div class="basket-info-list">		
+					<div class="basket-info-list">	
+					</div>
+					<div class="basket-info-total">	
 					</div>
 				</div>
 			</div>
