@@ -7,6 +7,8 @@ class Restaurant < ApplicationRecord
   has_many :dishes, through: :menu_items
   has_many :reviews, dependent: :destroy
   has_one_attached :photo
+  has_rich_text :description
+  
   include PgSearch::Model
   pg_search_scope :global_search,
     against: [ :category, :address ],
