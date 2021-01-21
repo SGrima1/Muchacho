@@ -58,17 +58,31 @@
   grid-row: 1;
 }
 
-p {
-  margin-bottom: 0;
+.index-card-grid{
+  display: grid;
+  grid-template-rows: 1fr 3fr 1fr;
+  align-items: center;
+  height: 30%;
+  align-self: end;
+  padding: 15px ;
+  margin-bottom: 45px;
 }
 
-.empty {
-  color: white;
+.index-card-grid a{
+  color: #f8f9fa;
+  text-shadow: 2px 2px 2px 4px rgba(0,0,0,0.4) ;
 }
 
-.fallback.flag p {
-  color: white;
+.index-card-grid p{
+  color: #f8f9fa;
+  text-shadow: 2px 2px 2px 4px rgba(0,0,0,0.4) ;
 }
+
+.index-card-grid h4{
+  color: #f8f9fa;
+  text-shadow: 2px 2px 2px 4px rgba(0,0,0,0.4) ;
+}
+
 
 .tasting-circle {
   width: 65px;
@@ -108,8 +122,11 @@ p {
   position: relative;
 }
 
-.restaurant-card-title_and_flag a {
-font-family: 'Playfair Display', serif;
+.index-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 400;
+  color: #f8f9fa;
 }
 
 @media(max-width: 768px) {
