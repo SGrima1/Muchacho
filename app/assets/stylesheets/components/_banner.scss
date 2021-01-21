@@ -12,7 +12,9 @@
   background-size: cover;
   background-position: center;
   padding: 150px 0;
-  background-repeat: no-repeat;
+  background: asset_url('assets/dinner.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
   height: 100vh;
 }
 
@@ -63,3 +65,65 @@
   opacity: .7;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
+
+.index-banner-grid{
+  display: grid;
+  margin-left: 24vh;
+  margin-right: 24vh;
+  height: 80vh;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-rows: 6fr 1fr 1fr;
+  align-items: center;
+  grid-template-areas: 
+  "title x x"
+  "space space space "
+  "footer footer footer ";
+}
+
+.index-banner-grid h1{
+  font-size: 99px;
+  font-style: normal;
+  color: #ffffff;
+  font-weight: 400;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+  grid-area: title;
+  padding-left: 4vh;
+}
+
+.index-banner-grid p{
+  font-size: 12px;
+  font-style: normal;
+  color: #cbcbcb;
+  font-weight: 500;
+  line-height: 14px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  grid-area: para;
+  padding-left: 4vh;
+}
+
+.index-banner-grid > .space{
+  grid-area: space;
+  border-bottom: 2px solid lightgray;
+}
+
+.index-banner-grid > .index-shop{
+  font-size: 24px !important ;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  color: #ffffff;
+  font-weight: 500;
+  line-height: 19px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  grid-area: footer;
+  justify-self: center;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 32px;
+  align-items: center;
+  margin: auto;
+}
+
+.shop_font_awesome{
+
+}
+
