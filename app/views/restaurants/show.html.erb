@@ -20,21 +20,26 @@
 				<h6><%= fa_icon "camera-retro" %> </h6>
 			</button>
 			<div class="collapse" id="basketDropdown">
-				<div class="col-2 restaurant-cart basket-info">
+				<div class="col-3 restaurant-cart basket-info">
 					<h4>Basket</h4>
-					
-					<%= simple_form_for [@restaurant, @order] do |f| %>
-						<%= f.input :dish_id, as: :hidden %>
-						<%= f.input :wine_id, as: :hidden %>
-						<%= f.input :status, :input_html => { :value => 'Being Prepared' }, as: :hidden %>
-						<%= @order.dish %>
-						<%= f.submit 'Confirm Order', class: 'btn btn-gold' %>
-						<%# <%= link_to "View Basket", dashboard_path, class: 'btn btn-checkout' %>
-					<% end %>
-					<div class="basket-info-list">	
-					</div>
-					<div class="basket-info-total">	
-					</div>
+					<div class="basket-grid">
+						<%= simple_form_for [@restaurant, @order], html: { class: :new_order_form } do |f| %>
+							<%= f.input :dish_id, as: :hidden %>
+							<%= f.input :wine_id, as: :hidden %>
+							<%= f.input :status, :input_html => { :value => 'Being Prepared' }, as: :hidden %>
+							<%= @order.dish %>
+							<%= f.submit 'Confirm Order', class: 'btn btn-gold confirm-order' %>
+							<%# <%= link_to "View Basket", dashboard_path, class: 'btn btn-checkout' %>
+						<% end %>
+						<div class="basket-info-list">
+							<div class="basket-dishName">Description</div><div class="basket-dishCost">Price</div><div class="basket-dishCount">Quantity</div><div class="basket-dishTotal">Total</div>
+							
+						</div>
+						<div class="basket-info-list-push">	
+						</div>
+						<div class="basket-info-total">	
+						</div>
+					</div>	
 				</div>
 			</div>
 	</div>

@@ -81,7 +81,7 @@ function updateDisplay() {
   let total = 0;
   const elBasket = document.querySelector(".basket-info");
   if (elBasket) {
-    let elBasketInfo = document.querySelector(".basket-info-list");
+    let elBasketInfo = document.querySelector(".basket-info-list-push");
     if (elBasketInfo) {
       while (elBasketInfo.firstChild){
         
@@ -89,7 +89,7 @@ function updateDisplay() {
       }    
       basket.forEach((order) => {
         total += parseInt(order.cost * order.count, 10);
-        elBasketInfo.insertAdjacentHTML("beforeend",`<div class="basket-dishName">${order.dishName} </div><div class="basket-dishCost">${parseInt(order.cost, 10) / 100}</div><div class="basket-dishCount">${order.count}</div>`)
+        elBasketInfo.insertAdjacentHTML("beforeend",`<div class="basket-dishName">${order.dishName}</div><div class="basket-dishCost">${parseInt(order.cost, 10) / 100}</div><div class="basket-dishCount">${order.count}</div> <div class="basket-dishTotal">${parseInt(order.cost * order.count, 10)/ 100}</div>`)
       });
     }
     let elBasketTotal = document.querySelector(".basket-info-total");
@@ -97,7 +97,7 @@ function updateDisplay() {
       while (elBasketTotal.firstChild){
         elBasketTotal.removeChild(elBasketTotal.firstChild);
       }      
-        elBasketTotal.insertAdjacentHTML("beforeend",`<div class="basket-dishTotal">TOTAL: ${total / 100}</div>`)
+        elBasketTotal.insertAdjacentHTML("beforeend",`<div class="basket-dishName">TOTAL</div> <div class="basket-dishTotal">${total / 100}</div>`)
       
     }
   }
