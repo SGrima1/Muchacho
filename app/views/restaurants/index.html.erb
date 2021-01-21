@@ -47,7 +47,7 @@
               <div class="tasting-circle">TASTING MENU</div>
             <% end %>
             <% if restaurant.dietary.present? && restaurant.dietary != "None" %>
-              <div class="dietary-circle"><p><%= restaurant.dietary.upcase %></p></div>
+              <div class="dietary-circle"><%= restaurant.dietary.upcase %></div>
             <% end %>
             <div class="index-card-grid">
             <div class="index-card-category">

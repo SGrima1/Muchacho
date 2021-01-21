@@ -61,7 +61,6 @@
 .index-card-grid{
   display: grid;
   grid-template-rows: 1fr 3fr 1fr;
-  align-items: center;
   height: 30%;
   align-self: end;
   padding: 15px ;
@@ -95,10 +94,12 @@
   background: lightgray;
   display: flex;
   align-items: center;
+  justify-content: center;
   font-style: bold;
   top: 15px;
   right: 15px;
   font-family: 'Roboto', serif;
+  font-weight: 500;
 }
 
 .dietary-circle {
@@ -112,10 +113,12 @@
   background: lightgray;
   display: flex;
   align-items: center;
+  justify-content: center;
   font-style: bold;
   top: 15px;
   right: 90px;
   font-family: 'Roboto', serif;
+  font-weight: 500;
 }
 
 .index-card {
