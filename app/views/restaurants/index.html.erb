@@ -1,4 +1,22 @@
+  <div class="banner">
+  <div class="index-banner-grid">
+    <h1>Master your evening</h1>
+    <div class="space"></div>
+    <div class="index-shop">
+    <div>
+    <h3>Shop now</h3>
+    </div>
+    <div>
+        <h4><%= fa_icon "chevron-circle-down" , class: "fa-2x shop_font_awesome" %></h4>
+     </div>
+    </div> 
+  </div>
+  </div>
+
 <div class="index-page-container">
+
+
+
   <div class="sidebar ">
     <!-- Sidebar here -->
 
@@ -12,58 +30,39 @@
     <% end %>
   </div>
 
-
+    
     <div class="index-grid">
+    <h2>Discover Our Restaurants Near You </h2>  
       <% @restaurants.each do |restaurant| %>
         <div class="m-3 p-3">
-          <div class="restaurant-card">
-            <% if  restaurant.tasting_menu.present? %>
-            <div class="tasting-circle">TASTING MENU</div>
-            <% end %>
+          <div class="restaurant-card" style="background-image: url(
+           
             <% if restaurant.photo.attached?  %>
-              <%= cl_image_tag restaurant.photo.key, height: 300, width: 400, crop: :fill %>
+              <%= cl_image_path restaurant.photo.key, height: 300, width: 400, crop: :fill %>
             <% else %>
-               <%= image_tag "dish.jpg" %>
-              <!-- <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png"> -->
-          <% end %>
-
-            <div class="restaurant-card-container">
-               <div class="restaurant-card-title_and_flag d-flex justify-content-between mt-1">
-                <h4><b> <%= link_to restaurant.name, restaurant_path(restaurant.id) %> </b></h4>
-              </div>
-
-
-              <div class="restaurant-card-dietary_and_price">
-                <div class="d-flex property">
-                  <p><small><%= restaurant.category %> cuisine</small></p>
-                  <p class="flag"><%= image_tag "#{restaurant.flag_file_name}" %><p>
-                  <!-- <p><small>£££</small></p> -->
-                </div>
-                <% if restaurant.dietary_icon_file_name != "dietary_fallback.png" %>
-                  <div class="d-flex property">
-                    <p><small><%= restaurant.dietary %></small></p>
-                    <p class="flag"><%= image_tag "#{restaurant.dietary_icon_file_name}" %><p>
-                  </div>
-                <% else %>
-                   <div class="d-flex property">
-                    <p><small class="empty">Empty</small></p>
-                    <p><small class="em"><i class="far fa-empty-set"></i></small></p>
-                  </div>
-                <% end %>
-                <!-- <div class="d-flex property">
-                <% if restaurant.dietary %>
-                  <p><small><%= restaurant.dietary %></small></p>
-                  <p><small><%= restaurant.dietary_icon.html_safe %></small></p>
-
-                <% else %>
-                 <p><small class="empty">Empty</small></p>
-                 <p><small class="em"><i class="far fa-empty-set"></i></small></p>
-                <% end %>
-                </div> -->
-
-              </div>
-
+               <%= 'assets/restaurant.png' %>
+            <% end %>
+           );">
+            <% if  restaurant.tasting_menu.present? %>
+              <div class="tasting-circle">TASTING MENU</div>
+            <% end %>
+            <% if restaurant.dietary.present? && restaurant.dietary != "None" %>
+              <div class="dietary-circle"><%= restaurant.dietary.upcase %></div>
+            <% end %>
+            <div class="index-card-grid">
+            <div class="index-card-category">
+                <p><%= restaurant.category %> cuisine</p>
             </div>
+            <div class="index-card-title">
+              <%= link_to restaurant.name, restaurant_path(restaurant.id) %>
+            </div>
+            <div class="index-card-discover">
+              <h4>Discover Now <%= fa_icon "chevron-circle-right" , class: "discover_font_awesome" %> </h4>
+            </div>
+
+
+
+           </div> 
           </div>
         </div>
        <% end %>
