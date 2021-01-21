@@ -43,50 +43,21 @@
                <%= 'assets/restaurant.png' %>
             <% end %>
            );">
-
-
             <% if  restaurant.tasting_menu.present? %>
             <div class="tasting-circle">TASTING MENU</div>
             <% end %>
          
-
-            <div class="restaurant-card-container">
                <div class="restaurant-card-title_and_flag d-flex justify-content-between mt-1">
                 <h4><b> <%= link_to restaurant.name, restaurant_path(restaurant.id) %> </b></h4>
               </div>
 
-
-              <div class="restaurant-card-dietary_and_price">
                 <div class="d-flex property">
-                  <p><small><%= restaurant.category %> cuisine</small></p>
-                  <p class="flag"><%= image_tag "#{restaurant.flag_file_name}" %><p>
+                  <p><%= restaurant.category %> cuisine</p>
                   <!-- <p><small>£££</small></p> -->
                 </div>
-                <% if restaurant.dietary_icon_file_name != "dietary_fallback.png" %>
-                  <div class="d-flex property">
-                    <p><small><%= restaurant.dietary %></small></p>
-                    <p class="flag"><%= image_tag "#{restaurant.dietary_icon_file_name}" %><p>
-                  </div>
-                <% else %>
-                   <div class="d-flex property">
-                    <p><small class="empty">Empty</small></p>
-                    <p><small class="em"><i class="far fa-empty-set"></i></small></p>
-                  </div>
+                <% if restaurant.dietary.present? && restaurant.dietary != "None" %>
+                  <div class="dietary-circle"><p><%= restaurant.dietary.upcase %></p></div>
                 <% end %>
-                <!-- <div class="d-flex property">
-                <% if restaurant.dietary %>
-                  <p><small><%= restaurant.dietary %></small></p>
-                  <p><small><%= restaurant.dietary_icon.html_safe %></small></p>
-
-                <% else %>
-                 <p><small class="empty">Empty</small></p>
-                 <p><small class="em"><i class="far fa-empty-set"></i></small></p>
-                <% end %>
-                </div> -->
-
-              </div>
-
-            </div>
           </div>
         </div>
        <% end %>
