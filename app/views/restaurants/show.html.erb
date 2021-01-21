@@ -104,7 +104,7 @@
       <% @restaurant.menus.each do |menu| %>
 
         <% if menu.tasting == true  %>
-					<h6 style="max-width: 720px;"><%= @restaurant.description %></h6>
+					<p style="max-width: 720px; font-weight: 200;"><%= @restaurant.description %></p>
             <button type="button" class="btn btn-add-basket" id="tasting-basket" data-dish-id="<%= menu.menu_items.pluck(:dish_id).join(",") %>" 
 						
 						data-dish-cost="<% 
