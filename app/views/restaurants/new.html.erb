@@ -7,7 +7,7 @@
       <h5 class="text-muted"></h5>
       <%= simple_form_for @restaurant do |f| %>
       <%= f.input :name, label: false, placeholder: 'Restaurant Name' %>
-      <%= f.input :description, label: false, placeholder: 'Your restaurant description' %>
+      <%= f.rich_text_area :description, label: false, placeholder: 'Your restaurant description' %>
       <%= f.input :photo, as: :file %>
       <div class="row">
         <div class="col-6">
