@@ -35,16 +35,20 @@
     <h2>Discover Our Restaurants Near You </h2>  
       <% @restaurants.each do |restaurant| %>
         <div class="m-3 p-3">
-          <div class="restaurant-card">
+          <div class="restaurant-card" style="background-image: url(
+           
+            <% if restaurant.photo.attached?  %>
+              <%= cl_image_path restaurant.photo.key, height: 300, width: 400, crop: :fill %>
+            <% else %>
+               <%= 'assets/restaurant.png' %>
+            <% end %>
+           );">
+
+
             <% if  restaurant.tasting_menu.present? %>
             <div class="tasting-circle">TASTING MENU</div>
             <% end %>
-            <% if restaurant.photo.attached?  %>
-              <%= cl_image_tag restaurant.photo.key, height: 300, width: 400, crop: :fill %>
-            <% else %>
-               <%= image_tag "dish.jpg" %>
-              <!-- <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png"> -->
-          <% end %>
+         
 
             <div class="restaurant-card-container">
                <div class="restaurant-card-title_and_flag d-flex justify-content-between mt-1">
