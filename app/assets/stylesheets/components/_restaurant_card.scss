@@ -1,20 +1,14 @@
 .restaurant-card {
   position: relative;
-  display: grid;
   height: 600px;
   color: #446484;
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
   border-radius: 5px; /* 5px rounded corners */
-  img {
-    border-radius: 5px 5px 0 0;
-  }
+  z-index: 0;
   .fa-star {
     color: #f2a339;
     text-shadow: 0 0 2px black;
-
   }
 }
 
@@ -23,14 +17,28 @@
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.6);
 }
 
+.restaurant-card-image{
+  background-size: cover;
+  background-position: center;
+  transition: 0.3s;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
 
+.restaurant-card-image:hover{
+  transform: scale(1.2);
+}
+
+.restaurant-card-info{
+  display: grid;
+  z-index: 2;
+}
 
 .restaurant-card-container {
   padding: 2px 16px;
 }
 
-.restaurant-card-dietary_and_price {
-}
 
 .property {
   p {

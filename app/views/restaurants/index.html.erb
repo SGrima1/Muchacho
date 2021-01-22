@@ -4,7 +4,7 @@
     <div class="space"></div>
     <div class="index-shop">
     <div>
-    <h3>Shop now</h3>
+    <h3> <a href="#index-title">  Shop now </a></h3>
     </div>
     <div>
         <h4><%= fa_icon "chevron-circle-down" , class: "fa-2x shop_font_awesome" %></h4>
@@ -32,38 +32,43 @@
 
     
     <div class="index-grid">
-    <h2>Discover Our Restaurants Near You </h2>  
+    <h2> <a id="index-title"></a> Discover Our Restaurants Near You  </h2>  
       <% @restaurants.each do |restaurant| %>
         <div class="m-3 p-3">
-          <div class="restaurant-card" style="background-image: url(
-           
-            <% if restaurant.photo.attached?  %>
-              <%= cl_image_path restaurant.photo.key, height: 300, width: 400, crop: :fill %>
-            <% else %>
-               <%= 'assets/restaurant.png' %>
-            <% end %>
-           );">
-            <% if  restaurant.tasting_menu.present? %>
-              <div class="tasting-circle">TASTING MENU</div>
-            <% end %>
-            <% if restaurant.dietary.present? && restaurant.dietary != "None" %>
-              <div class="dietary-circle"><%= restaurant.dietary.upcase %></div>
-            <% end %>
-            <div class="index-card-grid">
-            <div class="index-card-category">
-                <p><%= restaurant.category %> cuisine</p>
+          <%= link_to restaurant_path(restaurant.id) do %> 
+           <div class="restaurant-card" > 
+            
+             <div class="restaurant-card-image" style="background-image: url(
+                <% if restaurant.photo.attached?  %>
+                  <%= cl_image_path restaurant.photo.key, height: 300, width: 400, crop: :fill %>
+                <% else %>
+                  <%= 'assets/restaurant.png' %>
+                <% end %>
+              );"> 
+              </div>
+            <div class="restaurant-card-info">  
+              <% if  restaurant.tasting_menu.present? %>
+                <div class="tasting-circle">TASTING MENU</div>
+              <% end %>
+              <% if restaurant.dietary.present? && restaurant.dietary != "None" %>
+                <div class="dietary-circle"><%= restaurant.dietary.upcase %></div>
+              <% end %>
+              <div class="index-card-grid">
+              <div class="index-card-category">
+                  <p><%= restaurant.category %> cuisine</p>
+              </div>
+              <div class="index-card-title">
+                <%= link_to restaurant.name, restaurant_path(restaurant.id) %>
+              </div>
+              <div class="index-card-discover">
+                <h4>Discover Now <%= fa_icon "chevron-circle-right" , class: "discover_font_awesome" %> </h4>
+              </div>
             </div>
-            <div class="index-card-title">
-              <%= link_to restaurant.name, restaurant_path(restaurant.id) %>
-            </div>
-            <div class="index-card-discover">
-              <h4>Discover Now <%= fa_icon "chevron-circle-right" , class: "discover_font_awesome" %> </h4>
-            </div>
-
 
 
            </div> 
           </div>
+        <% end %>  
         </div>
        <% end %>
     </div>
