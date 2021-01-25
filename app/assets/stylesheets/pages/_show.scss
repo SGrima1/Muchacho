@@ -1,6 +1,6 @@
 
 .restaurant-info p{
- font-size: 10px;
+ font-size: 16px;
 }
 
 .show-container{
@@ -22,6 +22,21 @@
   width: 1360px;
   padding-left: 40px;
 }
+
+.btn-ghost {
+  color: white;
+  border: 1px solid #4A4A4A;
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-weight: lighter;
+  background-color: lightblue;
+}
+
+.btn-ghost:hover {
+  opacity: 1;
+}
+
+
 
 .btn-dish {
   color: #4A4A4A;
@@ -260,4 +275,13 @@ font-size: 60px;
   text-align: center;
 }
 
+.basket-toggler{
+  display: grid;
+  grid-template-columns: auto auto;
+  color: white;
+}
+
+.basket-toggler p{
+  margin: 0;
+}
 

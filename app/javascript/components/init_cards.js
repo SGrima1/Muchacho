@@ -93,12 +93,23 @@ function updateDisplay() {
       });
     }
     let elBasketTotal = document.querySelector(".basket-info-total");
+    let elBasketBtn = document.querySelector(".basket-btn-total");
     if (elBasketTotal) {
       while (elBasketTotal.firstChild){
         elBasketTotal.removeChild(elBasketTotal.firstChild);
       }      
         elBasketTotal.insertAdjacentHTML("beforeend",`<div class="basket-dishName">TOTAL</div> <div class="basket-dishTotal">${total / 100}</div>`)
-      
     }
+    if (elBasketBtn) {
+      while (elBasketBtn.firstChild){
+        elBasketBtn.removeChild(elBasketBtn.firstChild);
+      }      
+        elBasketBtn.insertAdjacentHTML("beforeend",`<p><div class="basket-dishTotal"> - £${total / 100}</div></p>`)
+    }
+
+
+
+
+
   }
 }

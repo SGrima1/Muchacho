@@ -24,6 +24,9 @@
 .navbar-fixed-top.scrolled {
   background-color: #121b2a  !important;
   transition: background-color 700ms linear;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .btn-new {

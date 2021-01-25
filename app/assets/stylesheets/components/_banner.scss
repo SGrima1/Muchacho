@@ -11,11 +11,11 @@
 .banner {
   background-size: cover;
   background-position: center;
-  padding: 150px 0;
   background: asset_url('assets/dinner.jpg') no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
+  height: 90vh;
+  -ms-background-position-x: center;
+  -ms-background-position-y: bottom;
+  background-position: center bottom;
 }
 
 .banner h1 {
@@ -37,11 +37,23 @@
   background-size: cover;
   background-position: center;
   background-color: $m-blue;
-  padding-left: 10%;
   background-repeat: no-repeat;
-  height: 17vh;
+  padding-bottom: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  justify-items: center;
+  align-items: center;
 }
 
+.show_banner.scrolled{
+  width: 100%;
+  z-index: 1;
+  position: fixed;
+  top: 10%;
+  left: 0;
+  background-color: #121b2a  !important;
+  transition: background-color 700ms linear;
+}
 .show_banner h1 {
   margin: 0;
   color: $m-gold;

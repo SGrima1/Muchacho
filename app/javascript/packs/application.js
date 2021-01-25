@@ -48,9 +48,7 @@ import { profileDropdown } from "../components/init_dropdown"
 
 document.addEventListener('turbolinks:load', () => {
   // Call your JS functions here
-  initUpdateNavbarOnScroll();
   profileDropdown();
-  initUpdateNavbarOnScroll();
   backgroundVideo();
   slickCarousel();
   $('.scroller').slick();

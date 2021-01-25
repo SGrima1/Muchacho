@@ -9,6 +9,17 @@ const initUpdateNavbarOnScroll = () => {
       }
     });
   }
+
+  const banner = document.querySelector('.show-banner');
+  if (banner) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY >= window.innerHeight) {
+        banner.classList.add('show-banner-scrolled');
+      } else {
+        banner.classList.remove('show-banner-scrolled');
+      }
+    });
+  } 
 }
 
 export { initUpdateNavbarOnScroll };
@@ -18,5 +29,7 @@ $(function () {
   $(document).scroll(function () {
     var $nav = $(".navbar-fixed-top");
     $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+    var $banner = $(".show_banner");
+    $banner.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
   });
 });

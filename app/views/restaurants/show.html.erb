@@ -1,23 +1,12 @@
 <div class="show_banner">
-</div>
-<div class="row show_banner mb-5 mb-5 justify-content-bewteen">
-  <div class="col-8 restaurant-info" style="left: 35px;">
+  <div class="restaurant-info" >
     <h1><%= @restaurant.name %> <i class="fas fa-utensils"></i></h1>
 
     <p><%= @restaurant.category %> <i class="fas fa-grip-lines-vertical"></i> <%= @restaurant.dietary %></p>
-  </div>
-  <div class="col-4" style="margin-left: -100px;">
-    <iframe src="<%=@restaurant.spotify_url%>" width="450" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
-  </div>
-</div>
-
-
-
-<div class="show-container mx-auto">
 		<div class="basket-container">
-			<button class="basket-toggler" type="button" data-toggle="collapse" data-target="#basketDropdown" aria-controls="basketDropdown" aria-expanded="false" aria-label="Toggle navigation">
-				<h6><%= fa_icon "camera-retro" %> </h6>
+			<button class="basket-toggler btn btn-ghost" type="button" data-toggle="collapse" data-target="#basketDropdown" aria-controls="basketDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<a>Basket <%= fa_icon "shopping-cart" %><div class="basket-btn-total"></div></a>	
 			</button>
 			<div class="collapse" id="basketDropdown">
 				<div class="col-3 restaurant-cart basket-info">
@@ -43,6 +32,17 @@
 				</div>
 			</div>
 	</div>
+  </div>
+  <div class="spotify-player" >
+    <iframe src="<%=@restaurant.spotify_url%>" width="450" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+  </div>
+</div>
+
+
+
+<div class="show-container mx-auto py-3">
+
 
   <div class="tasting-menu row mx-auto">
     <div class="restaurant-cards col-5" style="display: flex; justify-content: center">
