@@ -117,21 +117,28 @@
   margin-left: 5px;
   margin-right: 5px;
   margin-bottom: 30px;
-  background-color: $m-blue;
   border-radius: 10px;
   padding-bottom:10px;
+  height: 450px;
+  display: grid;
+  align-content: start;    
+  grid-template-rows: auto auto;
+  overflow: hidden;
+  position: relative;
+  background-image: no-repeat;
 }
 
-// .card-dish :hover {
-//   transform:scale(1.1);
-// }
-
-.card-dish > img {
-  height: 150px;
+.card-dish-image {
+  background-size: cover;
+  background-position: center;
+  transition: 0.7s;
   width: 100%;
-  object-fit: cover;
+  height: 100%;
 }
 
+.card-dish-image:hover {
+  transform: scale(1.1);
+}
 .card-dish h2 {
   font-size: 14px;
   font-weight: bold;
@@ -139,18 +146,59 @@
 }
 
 .card-dish p {
-  font-size: 12px;
-  opacity: .7;
+  font-size: 16px;
   padding-left: 10px;
+  text-shadow: gray;
 }
 
+.card-dish-display{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: 450px;
+}
+
+.dish-add-to-cart{
+  align-self: end;
+  justify-self: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+#dish_basket{
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(44px);
+  transition: all .4s ease-in-out;
+}
+
+.card-dish-display:hover #dish_basket{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
 
 .card-dish .card-dish-infos {
-  padding: 16px;
-  display: flex;
+  align-self: start;
+  padding: 8px 16px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "dish-title dish-title"
+                       "dish-cost dish-time" ;
   justify-content: space-between;
-  align-items: flex-end;
-  position: relative;
+}
+.link_to_modal{
+  grid-area: dish-title;
+  font-size: 20px;
+}
+
+#dish.cost{
+  grid-area: dish-cost;
+}
+
+#dish-time{
+  grid-area: dish-time;
 }
 
 .card-dish-infos .card-dish-user {

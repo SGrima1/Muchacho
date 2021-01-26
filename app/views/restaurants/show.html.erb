@@ -9,7 +9,7 @@
 				<a>Basket <%= fa_icon "shopping-cart" %><div class="basket-btn-total"></div></a>	
 			</button>
 			<div class="collapse" id="basketDropdown">
-				<div class="col-3 restaurant-cart basket-info">
+				<div class="restaurant-cart basket-info">
 					<h4>Basket</h4>
 					<div class="basket-grid">
 						<%= simple_form_for [@restaurant, @order], html: { class: :new_order_form } do |f| %>
@@ -138,105 +138,158 @@
 				<% if menu.tasting == false  %>
 					<% menu.menu_items.each do |items| %>
 						<% if items.dish.meal_category == "Starter"  %>
-							<div class="card-dish" >
-							<% if items.dish.photo.attached?  %>
-                <%= cl_image_tag items.dish.photo.key, height: 300, width: 400, crop: :fill %>
+							<div class="card-dish" style="background-image: url(
+                <% if items.dish.photo.attached?  %>
+                  <%= cl_image_path items.dish.photo.key, height: 450, width: 300, crop: :fill, gravity: :center %>
                 <% else %>
-                <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
-              <% end %>
-								<div class="card-dish-infos mt-4">
+                  <%= 'assets/restaurant.png' %>
+                <% end %>
+								);"> 
+							
 
-                    <!-- Button trigger modal -->
-											<button type="button" class="btn link_to_modal" data-toggle="modal" data-target="#exampleModal_<%= items.dish.id %>">
-												<%= items.dish.name %>
-											</button>
-											<!-- <button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>">Add to Basket</button> -->
+								<div class="card-dish-display">
+									<div class="card-dish-infos">
 
-
-                    <!-- Modal -->
-										<div class="modal fade" id="exampleModal_<%= items.dish.id %>" tabindex="-1" role="dialog" pearia-labelledby="exampleModalLabel" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel"><%= items.dish.name %></h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<div class="modal-body">
-														<div class="card-product" id="dish-price" >
-															<% if items.dish.photo.attached?  %>
-                                <%= cl_image_tag items.dish.photo.key, height: 300, width: 400, crop: :fill %>
-                              <% else %>
-                                <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
-                              <% end %>
-															  <div class="product-infos">
-																	<div class="title_price">
-																		<h2><%= items.dish.name %></h2>
-																		<h2>£ <%= items.dish.cost / 100 %></h2 >
+									<!-- Button trigger modal -->
+										<button type="button" class="btn link_to_modal" data-toggle="modal" data-target="#exampleModal_<%= items.dish.id %>">
+											<%= items.dish.name %>
+										</button>
+										<!-- <button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>">Add to Basket</button> -->
+											<!-- Modal -->
+											<div class="modal fade" id="exampleModal_<%= items.dish.id %>" tabindex="-1" role="dialog" pearia-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel"><%= items.dish.name %></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<div class="card-product" id="dish-price" >
+																<% if items.dish.photo.attached?  %>
+																	<%= cl_image_tag items.dish.photo.key, height: 300, width: 400, crop: :fill %>
+																<% else %>
+																	<img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
+																<% end %>
+																	<div class="product-infos">
+																		<div class="title_price">
+																			<h2><%= items.dish.name %></h2>
+																			<h2>£ <%= items.dish.cost / 100 %></h2 >
+																		</div>
+																		<div class="row_description">
+																			<% if  items.dish.dietary == "None" %>
+																			<% else %>
+																				<p> <%= "Perfect for #{items.dish.dietary} diets." %> </p>
+																			<% end %>
+																		</div>
+																		<button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>" data-dish-cost="<%= items.dish.cost %>">Add to Basket</button>
 																	</div>
-																  <div class="row_description">
-																		<% if  items.dish.dietary == "None" %>
-																		<% else %>
-																			<p> <%= "Perfect for #{items.dish.dietary} diets." %> </p>
-																		<% end %>
-																  </div>
-															    <button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>" data-dish-cost="<%= items.dish.cost %>">Add to Basket</button>
-															  </div>
-															</div>
-															<div class="dish_instructions">
-																	<h2><strong>Instructions:</strong></h2>
-																	<div>
-																		<p> <%= items.dish.preparation %> </p>
-																	</div>
-															</div>
-                                <% if items.dish.wine %>
-    															<div class="wine_title">
-    															<h2><strong>Perfect Pairing:</strong></h2>
-    																<%= link_to "Add wine",  new_dish_wine_path(items.dish.id) if current_user.admin?  %>
-    															</div>
-  															    <div class="card-product">
-        															<% if items.dish.wine.photo.attached?  %>
-                                        <%= cl_image_tag items.dish.wine.photo.key, height: 300, width: 150, crop: :fill %>
-                                      <% else %>
-                                        <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
-                                      <% end %>
-  																	  <div class="product-infos">
-  																		  <div class="title_price">
-  																				<h2><%= items.dish.wine.name %></h2>
-  																				<h2>£
-  																				<%= items.dish.wine.cost / 100 %></h2>
-  																		  </div>
-      																		<div class="row_description">
-      																			<p> <%= items.dish.wine.description  %> </p>
-      																		</div>
-  																		    <button type="button" class="btn btn-primary py-2" id="wine_basket" data-dish-id="<%= items.dish.wine.id %>" data-dish-name="<%= items.dish.wine.name %>" data-dish-cost="<%= items.dish.wine.cost %>">Add to Basket</button>
-  																	  </div>
-  															    </div>
-  															<% else %>
-  															 <%= link_to "Add wine",  new_dish_wine_path(items.dish_id) if current_user.admin?  %>
-  														  <% end %>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																</div>
+																<div class="dish_instructions">
+																		<h2><strong>Instructions:</strong></h2>
+																		<div>
+																			<p> <%= items.dish.preparation %> </p>
+																		</div>
+																</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-
-
-											<p><%= "Ready to serve" if items.dish.prep_time.nil? %></p>
-											<p><%= "#{items.dish.prep_time} minutes to prepare!" if items.dish.prep_time.nil? == false %></p>
-
-
-
-									<h5 class="card-trip-pricing btn-white">£<%= items.dish.cost / 100  %></h5>
-
+											<div id="dish-cost">	
+												<p class="card-dish-pricing">£<%= items.dish.cost.to_f.round(2) / 100  %> </p>	
+											</div>
+											<div id="dish-time">	
+												<% if items.dish.prep_time.nil? || items.dish.prep_time == 0 %>
+													<p><%= "Ready to serve" %></p>
+												<% else %>
+													<p><%= "Ready in #{items.dish.prep_time} min" if items.dish.prep_time.nil? == false %></p>
+												<% end %>
+											</div>	
+									</div>
+									<div class="dish-add-to-cart">
+									<button type="button" class="btn btn-primary p-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>" data-dish-cost="<%= items.dish.cost %>" >Add to Basket</button>
+									</div>
 								</div>
-
 							</div>
+
+							<% if items.dish.wine %>
+								
+								<div class="card-dish" style="background-image: url(
+                <% if items.dish.wine.photo.attached?  %>
+                  <%= cl_image_path items.dish.wine.photo.key, height: 450, width: 300, crop: :fill, gravity: :center %>
+                <% else %>
+                  <%= 'assets/restaurant.png' %>
+                <% end %>
+								);"> 
+							
+							<div class="card-dish-display">
+								<div class="card-dish-infos">
+									<!-- Button trigger modal -->
+										<button type="button" class="btn link_to_modal" data-toggle="modal" data-target="#exampleModal_Wine<%= items.dish.id %>">
+											<%= items.dish.wine.name %>
+										</button>
+										<!-- <button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>">Add to Basket</button> -->
+											<!-- Modal -->
+											<div class="modal fade" id="exampleModal_Wine<%= items.dish.id %>" tabindex="-1" role="dialog" pearia-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel"><%= items.dish.name %></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<div class="card-product" id="dish-price" >
+																<% if items.dish.wine.photo.attached?  %>
+																	<%= cl_image_tag items.dish.wine.photo.key, height: 300, width: 400, crop: :fill %>
+																<% else %>
+																	<img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
+																<% end %>
+																	<div class="product-infos">
+																		<div class="title_price">
+																			<h2><%= items.dish.wine.name %></h2>
+																			<h2>£ <%= items.dish.wine.cost / 100 %></h2 >
+																		</div>
+																		<button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.wine.id %>" data-dish-name="<%= items.dish.wine.name %>" data-dish-cost="<%= items.dish.wine.cost %>">Add to Basket</button>
+																	</div>
+																</div>
+																<div class="dish_instructions">
+																		<h2><strong>Description:</strong></h2>
+																		<div>
+																			<p> <%= items.dish.preparation %> </p>
+																		</div>
+																</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										
+
+													<div id="dish-cost">	
+														<p class="card-dish-pricing">£<%= items.dish.wine.cost.to_f.round(2) / 100  %> </p>	
+													</div>	
+											</div>
+											<div class="dish-add-to-cart">
+												<button type="button" class="btn btn-primary p-2" id="dish_basket" data-dish-id="<%= items.dish.wine.id %>" data-dish-name="<%= items.dish.wine.name %>" data-dish-cost="<%= items.dish.wine.cost %>" >Add to Basket</button>
+											</div>
+										</div>
+							</div>
+							<% else %>
+								<%= link_to "Add wine",  new_dish_wine_path(items.dish_id) if current_user.admin?  %>
 							<% end %>
+							<% end %>
+							
 						<% end %>
+						
 					<% end %>
 				<% end %>
 			</div>
@@ -244,111 +297,165 @@
 
 
 
-		<div class="menu-title">
-      <h3> Main </h3>
+    <div class="menu-title">
+        <h3> Mains </h3>
 			<div class="alacarte_cards">
 				<% @restaurant.menus.each do |menu| %>
 				<% if menu.tasting == false  %>
 					<% menu.menu_items.each do |items| %>
 						<% if items.dish.meal_category == "Main"  %>
-							<div class="card-dish" >
-							<% if items.dish.photo.attached?  %>
-                <%= cl_image_tag items.dish.photo.key, height: 300, width: 400, crop: :fill %>
-              <% else %>
-                <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
-              <% end %>
-								<div class="card-dish-infos mt-4">
-									<div>
-										<!-- Button trigger modal -->
-											<button type="button" class="btn link_to_modal" data-toggle="modal" data-target="#exampleModal_<%= items.dish.id %>">
-												<%= items.dish.name %>
-											</button>
-											<!-- <button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>">Add to Basket</button> -->
-										<!-- Modal -->
-										<div class="modal fade" id="exampleModal_<%= items.dish.id %>" tabindex="-1" role="dialog" pearia-labelledby="exampleModalLabel" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel"><%= items.dish.name %></h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<div class="modal-body">
+							<div class="card-dish" style="background-image: url(
+                <% if items.dish.photo.attached?  %>
+                  <%= cl_image_path items.dish.photo.key, height: 450, width: 300, crop: :fill, gravity: :center %>
+                <% else %>
+                  <%= 'assets/restaurant.png' %>
+                <% end %>
+								);"> 
+							
 
+								<div class="card-dish-display">
+									<div class="card-dish-infos">
+
+									<!-- Button trigger modal -->
+										<button type="button" class="btn link_to_modal" data-toggle="modal" data-target="#exampleModal_<%= items.dish.id %>">
+											<%= items.dish.name %>
+										</button>
+										<!-- <button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>">Add to Basket</button> -->
+											<!-- Modal -->
+											<div class="modal fade" id="exampleModal_<%= items.dish.id %>" tabindex="-1" role="dialog" pearia-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel"><%= items.dish.name %></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
 															<div class="card-product" id="dish-price" >
-															<% if items.dish.photo.attached?  %>
-                                <%= cl_image_tag items.dish.photo.key, height: 300, width: 400, crop: :fill %>
-                              <% else %>
-                                <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
-                              <% end %>
-															<div class="product-infos">
-																	<div class="title_price">
-																		<h2><%= items.dish.name %></h2>
-																		<h2>£ <%= items.dish.cost / 100 %></h2 >
-																	</div>
-																	<div class="row_description">
-																		<% if  items.dish.dietary == "None" %>
-																		<% else %>
-																			<p> <%= "Perfect for #{items.dish.dietary} diets." %> </p>
-																		<% end %>
-																	</div>
-																	<button type="button" class="btn btn-primary p-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>" data-dish-cost="<%= items.dish.cost %>" >Add to Basket</button>
-															</div>
-															</div>
-															<div class="dish_instructions">
-																	<h2><strong>Instructions:</strong></h2>
-																	<div>
-																		<p> <%= items.dish.preparation %> </p>
-																	</div>
-															</div>
-                               <% if items.dish.wine %>
-															<div class="wine_title">
-															<h2><strong>Perfect Pairing:</strong></h2>
-
-															</div>
-															<div class="card-product">
-															<% if items.dish.wine.photo.attached?  %>
-                                <%= cl_image_tag items.dish.wine.photo.key, height: 300, width: 100, crop: :fill %>
-                              <% else %>
-                                <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
-                              <% end %>
+																<% if items.dish.photo.attached?  %>
+																	<%= cl_image_tag items.dish.photo.key, height: 300, width: 400, crop: :fill %>
+																<% else %>
+																	<img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
+																<% end %>
 																	<div class="product-infos">
 																		<div class="title_price">
-																				<h2><%= items.dish.wine.name %></h2>
-																				<h2>£
-																				<%= items.dish.wine.cost / 100 %></h2>
+																			<h2><%= items.dish.name %></h2>
+																			<h2>£ <%= items.dish.cost / 100 %></h2 >
 																		</div>
 																		<div class="row_description">
-																			<p> <%= items.dish.wine.description  %> </p>
+																			<% if  items.dish.dietary == "None" %>
+																			<% else %>
+																				<p> <%= "Perfect for #{items.dish.dietary} diets." %> </p>
+																			<% end %>
 																		</div>
-																		<button type="button" class="btn btn-primary p-2" id="wine_basket" data-dish-id="<%= items.dish.wine.id %>" data-dish-name="<%= items.dish.wine.name %>" data-dish-cost="<%= items.dish.wine.cost %>">Add to Basket</button>
+																		<button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>" data-dish-cost="<%= items.dish.cost %>">Add to Basket</button>
 																	</div>
-															</div>
-															<% else %>
-															<%= link_to "Add wine",  new_dish_wine_path(items.dish_id) if current_user.admin?  %>
-                            <% end %>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
+																</div>
+																<div class="dish_instructions">
+																		<h2><strong>Instructions:</strong></h2>
+																		<div>
+																			<p> <%= items.dish.preparation %> </p>
+																		</div>
+																</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-
-											<p><%= "Ready to serve" if items.dish.prep_time.nil? %></p>
-                      <p><%= "#{items.dish.prep_time} minutes to prepare!" if items.dish.prep_time.nil? == false %></p>
-
+											<div id="dish-cost">	
+												<p class="card-dish-pricing">£<%= items.dish.cost.to_f.round(2) / 100  %> </p>	
+											</div>
+											<div id="dish-time">	
+												<% if items.dish.prep_time.nil? || items.dish.prep_time == 0 %>
+													<p><%= "Ready to serve" %></p>
+												<% else %>
+													<p><%= "Ready in #{items.dish.prep_time} min" if items.dish.prep_time.nil? == false %></p>
+												<% end %>
+											</div>	
 									</div>
-									<h5 class="card-trip-pricing btn-white">£<%= items.dish.cost / 100  %></h5>
-
-
+									<div class="dish-add-to-cart">
+									<button type="button" class="btn btn-primary p-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>" data-dish-cost="<%= items.dish.cost %>" >Add to Basket</button>
+									</div>
 								</div>
-
 							</div>
+
+							<% if items.dish.wine %>
+								
+								<div class="card-dish" style="background-image: url(
+                <% if items.dish.wine.photo.attached?  %>
+                  <%= cl_image_path items.dish.wine.photo.key, height: 450, width: 300, crop: :fill, gravity: :center %>
+                <% else %>
+                  <%= 'assets/restaurant.png' %>
+                <% end %>
+								);"> 
+							
+							<div class="card-dish-display">
+								<div class="card-dish-infos">
+									<!-- Button trigger modal -->
+										<button type="button" class="btn link_to_modal" data-toggle="modal" data-target="#exampleModal_Wine<%= items.dish.id %>">
+											<%= items.dish.wine.name %>
+										</button>
+										<!-- <button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>">Add to Basket</button> -->
+											<!-- Modal -->
+											<div class="modal fade" id="exampleModal_Wine<%= items.dish.id %>" tabindex="-1" role="dialog" pearia-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel"><%= items.dish.name %></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<div class="card-product" id="dish-price" >
+																<% if items.dish.wine.photo.attached?  %>
+																	<%= cl_image_tag items.dish.wine.photo.key, height: 300, width: 400, crop: :fill %>
+																<% else %>
+																	<img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
+																<% end %>
+																	<div class="product-infos">
+																		<div class="title_price">
+																			<h2><%= items.dish.wine.name %></h2>
+																			<h2>£ <%= items.dish.wine.cost / 100 %></h2 >
+																		</div>
+																		<button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.wine.id %>" data-dish-name="<%= items.dish.wine.name %>" data-dish-cost="<%= items.dish.wine.cost %>">Add to Basket</button>
+																	</div>
+																</div>
+																<div class="dish_instructions">
+																		<h2><strong>Description:</strong></h2>
+																		<div>
+																			<p> <%= items.dish.preparation %> </p>
+																		</div>
+																</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										
+
+													<div id="dish-cost">	
+														<p class="card-dish-pricing">£<%= items.dish.wine.cost.to_f.round(2) / 100  %> </p>	
+													</div>	
+											</div>
+											<div class="dish-add-to-cart">
+												<button type="button" class="btn btn-primary p-2" id="dish_basket" data-dish-id="<%= items.dish.wine.id %>" data-dish-name="<%= items.dish.wine.name %>" data-dish-cost="<%= items.dish.wine.cost %>" >Add to Basket</button>
+											</div>
+										</div>
+							</div>
+							<% else %>
+								<%= link_to "Add wine",  new_dish_wine_path(items.dish_id) if current_user.admin?  %>
 							<% end %>
+							<% end %>
+							
 						<% end %>
+						
 					<% end %>
 				<% end %>
 			</div>
@@ -356,110 +463,169 @@
 
 
 
-		<div class="menu-title">
-      <h3> Desserts </h3>
+    <div class="menu-title">
+        <h3> Desserts </h3>
 			<div class="alacarte_cards">
 				<% @restaurant.menus.each do |menu| %>
 				<% if menu.tasting == false  %>
 					<% menu.menu_items.each do |items| %>
 						<% if items.dish.meal_category == "Dessert"  %>
-							<div class="card-dish" >
-							<% if items.dish.photo.attached?  %>
-                <%= cl_image_tag items.dish.photo.key, height: 300, width: 400, crop: :fill %>
-              <% else %>
-                <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
-              <% end %>
-								<div class="card-dish-infos mt-4">
-									<div>
-										<!-- Button trigger modal -->
-											<button type="button" class="btn link_to_modal" data-toggle="modal" data-target="#exampleModal_<%= items.dish.id %>">
-												<%= items.dish.name %>
-											</button>
-											<!-- <button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>">Add to Basket</button> -->
-										<!-- Modal -->
-										<div class="modal fade" id="exampleModal_<%= items.dish.id %>" tabindex="-1" role="dialog" pearia-labelledby="exampleModalLabel" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel"><%= items.dish.name %></h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<div class="modal-body">
+							<div class="card-dish" style="background-image: url(
+                <% if items.dish.photo.attached?  %>
+                  <%= cl_image_path items.dish.photo.key, height: 450, width: 300, crop: :fill, gravity: :center %>
+                <% else %>
+                  <%= 'assets/restaurant.png' %>
+                <% end %>
+								);"> 
+							
 
+								<div class="card-dish-display">
+									<div class="card-dish-infos">
+
+									<!-- Button trigger modal -->
+										<button type="button" class="btn link_to_modal" data-toggle="modal" data-target="#exampleModal_<%= items.dish.id %>">
+											<%= items.dish.name %>
+										</button>
+										<!-- <button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>">Add to Basket</button> -->
+											<!-- Modal -->
+											<div class="modal fade" id="exampleModal_<%= items.dish.id %>" tabindex="-1" role="dialog" pearia-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel"><%= items.dish.name %></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
 															<div class="card-product" id="dish-price" >
-															<% if items.dish.photo.attached?  %>
-                                <%= cl_image_tag items.dish.photo.key, height: 300, width: 400, crop: :fill %>
-                              <% else %>
-                                <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
-                              <% end %>
-															<div class="product-infos">
-																	<div class="title_price">
-																		<h2><%= items.dish.name %></h2>
-																		<h2>£ <%= items.dish.cost / 100 %></h2 >
-																	</div>
-																	<div class="row_description">
-																		<% if  items.dish.dietary == "None" %>
-																		<% else %>
-																			<p> <%= "Perfect for #{items.dish.dietary} diets." %> </p>
-																		<% end %>
-																	</div>
-																	<button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>" data-dish-cost="<%= items.dish.cost %>">Add to Basket</button>
-															</div>
-															</div>
-															<div class="dish_instructions">
-																	<h2><strong>Instructions:</strong></h2>
-																	<div>
-																		<p> <%= items.dish.preparation %> </p>
-																	</div>
-															</div>
-                               <% if items.dish.wine %>
-															<div class="wine_title">
-															<h2><strong>Perfect Pairing:</strong></h2>
-															<%= link_to "Add wine",  new_dish_wine_path(items.dish.id) if current_user.admin?  %>
-															</div>
-															<div class="card-product">
-															<% if items.dish.wine.photo.attached?  %>
-                                <%= cl_image_tag items.dish.wine.photo.key, height: 300, width: 150, crop: :fill %>
-                              <% else %>
-                                <img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
-                              <% end %>
+																<% if items.dish.photo.attached?  %>
+																	<%= cl_image_tag items.dish.photo.key, height: 300, width: 400, crop: :fill %>
+																<% else %>
+																	<img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
+																<% end %>
 																	<div class="product-infos">
 																		<div class="title_price">
-																				<h2><%= items.dish.wine.name %></h2>
-																				<h2>£
-																				<%= items.dish.wine.cost / 100 %></h2>
+																			<h2><%= items.dish.name %></h2>
+																			<h2>£ <%= items.dish.cost / 100 %></h2 >
 																		</div>
 																		<div class="row_description">
-																			<p> <%= items.dish.wine.description  %> </p>
+																			<% if  items.dish.dietary == "None" %>
+																			<% else %>
+																				<p> <%= "Perfect for #{items.dish.dietary} diets." %> </p>
+																			<% end %>
 																		</div>
-																		<button type="button" class="btn btn-primary py-2" id="wine_basket" data-dish-id="<%= items.dish.wine.id %>" data-dish-name="<%= items.dish.wine.name %>" data-dish-cost="<%= items.dish.wine.cost %>">Add to Basket</button>
+																		<button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>" data-dish-cost="<%= items.dish.cost %>">Add to Basket</button>
 																	</div>
-															</div>
-															<% else %>
-															<%= link_to "Add wine",  new_dish_wine_path(items.dish_id) if current_user.admin?  %>
-														<% end %>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																</div>
+																<div class="dish_instructions">
+																		<h2><strong>Instructions:</strong></h2>
+																		<div>
+																			<p> <%= items.dish.preparation %> </p>
+																		</div>
+																</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-											<p><%= "Ready to serve" if items.dish.prep_time.nil? %></p>
-                      <p><%= "#{items.dish.prep_time} minutes to prepare!" if items.dish.prep_time.nil? == false %></p>
+											<div id="dish-cost">	
+												<p class="card-dish-pricing">£<%= items.dish.cost.to_f.round(2) / 100  %> </p>	
+											</div>
+											<div id="dish-time">	
+												<% if items.dish.prep_time.nil? || items.dish.prep_time == 0 %>
+													<p><%= "Ready to serve" %></p>
+												<% else %>
+													<p><%= "Ready in #{items.dish.prep_time} min" if items.dish.prep_time.nil? == false %></p>
+												<% end %>
+											</div>	
 									</div>
-									<h5 class="card-trip-pricing btn-white">£<%= items.dish.cost / 100  %></h5>
-								  </div>
-							  </div>
+									<div class="dish-add-to-cart">
+									<button type="button" class="btn btn-primary p-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>" data-dish-cost="<%= items.dish.cost %>" >Add to Basket</button>
+									</div>
+								</div>
+							</div>
+
+							<% if items.dish.wine %>
+								
+								<div class="card-dish" style="background-image: url(
+                <% if items.dish.wine.photo.attached?  %>
+                  <%= cl_image_path items.dish.wine.photo.key, height: 450, width: 300, crop: :fill, gravity: :center %>
+                <% else %>
+                  <%= 'assets/restaurant.png' %>
+                <% end %>
+								);"> 
+							
+							<div class="card-dish-display">
+								<div class="card-dish-infos">
+									<!-- Button trigger modal -->
+										<button type="button" class="btn link_to_modal" data-toggle="modal" data-target="#exampleModal_Wine<%= items.dish.id %>">
+											<%= items.dish.wine.name %>
+										</button>
+										<!-- <button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.id %>" data-dish-name="<%= items.dish.name %>">Add to Basket</button> -->
+											<!-- Modal -->
+											<div class="modal fade" id="exampleModal_Wine<%= items.dish.id %>" tabindex="-1" role="dialog" pearia-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel"><%= items.dish.name %></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<div class="card-product" id="dish-price" >
+																<% if items.dish.wine.photo.attached?  %>
+																	<%= cl_image_tag items.dish.wine.photo.key, height: 300, width: 400, crop: :fill %>
+																<% else %>
+																	<img height="300" width="400" src="https://res.cloudinary.com/dzyd1ynmn/image/upload/v1605792731/no_img_available_skqx9j.png">
+																<% end %>
+																	<div class="product-infos">
+																		<div class="title_price">
+																			<h2><%= items.dish.wine.name %></h2>
+																			<h2>£ <%= items.dish.wine.cost / 100 %></h2 >
+																		</div>
+																		<button type="button" class="btn btn-primary py-2" id="dish_basket" data-dish-id="<%= items.dish.wine.id %>" data-dish-name="<%= items.dish.wine.name %>" data-dish-cost="<%= items.dish.wine.cost %>">Add to Basket</button>
+																	</div>
+																</div>
+																<div class="dish_instructions">
+																		<h2><strong>Description:</strong></h2>
+																		<div>
+																			<p> <%= items.dish.preparation %> </p>
+																		</div>
+																</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										
+
+													<div id="dish-cost">	
+														<p class="card-dish-pricing">£<%= items.dish.wine.cost.to_f.round(2) / 100  %> </p>	
+													</div>	
+											</div>
+											<div class="dish-add-to-cart">
+												<button type="button" class="btn btn-primary p-2" id="dish_basket" data-dish-id="<%= items.dish.wine.id %>" data-dish-name="<%= items.dish.wine.name %>" data-dish-cost="<%= items.dish.wine.cost %>" >Add to Basket</button>
+											</div>
+										</div>
+							</div>
+							<% else %>
+								<%= link_to "Add wine",  new_dish_wine_path(items.dish_id) if current_user.admin?  %>
 							<% end %>
+							<% end %>
+							
 						<% end %>
+						
 					<% end %>
 				<% end %>
-
 			</div>
-    </div>
+		</div>
   </div>
 
 
