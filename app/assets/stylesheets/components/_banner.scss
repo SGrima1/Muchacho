@@ -9,15 +9,19 @@
 // }
 
 .banner {
-  background-size: cover;
-  background-position: center;
-  background: asset_url('assets/dinner.jpg') no-repeat;
   height: 90vh;
-  -ms-background-position-x: center;
-  -ms-background-position-y: bottom;
-  background-position: center bottom;
+  position: relative;
+  // background-size: cover;
+  // background-position: center;
+  // background: asset_url('assets/dinner.jpg') no-repeat;
+  // -ms-background-position-x: center;
+  // -ms-background-position-y: bottom;
+  // background-position: center bottom;
 }
 
+#banner_video{
+  z-index: 1;
+}
 .banner h1 {
   margin: 0;
   color: white;
@@ -79,6 +83,7 @@
 }
 
 .index-banner-grid{
+  z-index: 2;
   display: grid;
   margin-left: 24vh;
   margin-right: 24vh;

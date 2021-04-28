@@ -13,6 +13,10 @@ $('.slider-nav').slick({
   slidesToScroll: 1,
   asNavFor: '.slider-for',
   focusOnSelect: true
+  centerMode: true,
+  focusOnSelect: true,
+	infinite: true,
+	centerPadding: '0px'
 });
 };
 
